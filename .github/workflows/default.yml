@@ -1,0 +1,24 @@
+name: default
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+          ./scripts/build-production.sh
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          draft: false
+          prerelease: false
+          files: |
+            xxxx-${{ github.ref_name }}-amd64.release.tar.gz
