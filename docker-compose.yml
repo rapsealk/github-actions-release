@@ -1,0 +1,24 @@
+version: "3.4"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    image: "xxxx/django:${RELEASE_VERSION}"
+    depends_on:
+      - postgres
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/postgres/Dockerfile
+    image: "xxxx/postgres:${RELEASE_VERSION}"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/nginx/Dockerfile
+    image: "xxxx/nginx:${RELEASE_VERSION}"
+    depends_on:
+      - django
