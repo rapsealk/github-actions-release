@@ -22,3 +22,6 @@ services:
     image: "xxxx/nginx:${RELEASE_VERSION}"
     depends_on:
       - django
+
+  redis:
+    image: redis:6.2.7-alpine
