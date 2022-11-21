@@ -1,11 +1,11 @@
 #!/bin/bash
-RELEASE_VERSION=$(cat ./VERSION)
+export RELEASE_VERSION=$(cat ./VERSION)
 echo $RELEASE_VERSION
 
 REDIS_IMAGE=redis:6.2-alpine
 
 cp docker-compose.yml docker-compose.prod.yml
-sed -i "s/\${RELEASE_VERSION}/${RELEASE_VERSION}/" docker-compose.prod.yml   #--quiet
+sed -i "s/\${RELEASE_VERSION}/${RELEASE_VERSION}/" docker-compose.prod.yml
 
 docker-compose -f docker-compose.yml build
 
